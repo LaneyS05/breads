@@ -48,7 +48,7 @@ breads.put('/:arrayIndex', (req, res) => {
     req.body.hasGluten = false
   }
   Bread[req.params.arrayIndex] = req.body
-  res.redirect(`/breads`)
+  res.redirect('/breads')
 })
 
 // SHOW
