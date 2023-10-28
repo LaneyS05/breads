@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const express = require('express')
 const methodOverride = require('method-override')
+const breadsController = require('./controllers/breads_controller.js')
 
 
 // CONFIGURATION
@@ -18,7 +19,6 @@ app.use(methodOverride('_method'))
 
 
 // Breads
-const breadsController = require('./controllers/breads_controller.js')
 app.use('/breads', breadsController)
 
 // ROUTES

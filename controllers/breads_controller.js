@@ -16,7 +16,7 @@ breads.get('/', (req, res) => {
     )
   // res.send(Bread)
 })
-
+ 
 // CREATE
 breads.post('/', (req, res) => {
   console.log(req.body)
@@ -30,6 +30,25 @@ breads.post('/', (req, res) => {
   }
   Bread.push(req.body)
   res.redirect('/breads')
+})
+
+// EDIT
+breads.get('/:indexArray/edit', (req, res) => {
+  res.render('edit', {
+    bread: Bread[req.params.indexArray],
+    index: req.params.indexArray
+  })
+}) 
+
+// UPDATE
+breads.put('/:arrayIndex', (req, res) => {
+  if(req.body.hasGluten === 'on'){
+    req.body.hasGluten = true
+  } else {
+    req.body.hasGluten = false
+  }
+  Bread[req.params.arrayIndex] = req.body
+  res.redirect(`/breads`)
 })
 
 // SHOW
