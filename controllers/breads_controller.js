@@ -69,22 +69,27 @@ breads.get("/:id", (req, res) => {
 //Everything below is not being used
 
 // EDIT
-breads.get("/:indexArray/edit", (req, res) => {
-  res.render("edit", {
-    bread: Bread[req.params.indexArray],
-    index: req.params.indexArray,
+breads.get("/:id/edit", (req, res) => {
+  Bread.findById(req.params.id).then((foundBread) => {
+    res.render("edit", {
+      bread: foundBread,
+    });
   });
 });
 
 // UPDATE
-breads.put("/:arrayIndex", (req, res) => {
+breads.put("/:id", (req, res) => {
   if (req.body.hasGluten === "on") {
     req.body.hasGluten = true;
   } else {
     req.body.hasGluten = false;
   }
-  Bread[req.params.arrayIndex] = req.body;
-  res.redirect("/breads");
+  Bread.findByIdAndUpdate(req.params.id, req.body, { new: true }).then(
+    (updatedBread) => {
+      console.log(updatedBread);
+      res.redirect(`/breads/${req.params.id}`);
+    }
+  );
 });
 
 // SHOW
