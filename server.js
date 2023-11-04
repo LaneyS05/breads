@@ -3,7 +3,6 @@ const express = require("express");
 const methodOverride = require("method-override");
 const breadsController = require("./controllers/breads_controller.js");
 const mongoose = require("mongoose");
-//const { Schema } = mongoose;
 
 // CONFIGURATION
 require("dotenv").config();

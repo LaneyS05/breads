@@ -10,7 +10,7 @@ function New () {
           <input
             type="text"
             name="name"
-            id="name"
+            id="name" 
             //required
           />
           <label htmlFor="image">Image</label>
