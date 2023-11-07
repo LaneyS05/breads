@@ -2,6 +2,7 @@
 const express = require("express");
 const methodOverride = require("method-override");
 const breadsController = require("./controllers/breads_controller.js");
+const bakersController = require("./controllers/bakers_controller.js");
 const mongoose = require("mongoose");
 
 // CONFIGURATION
@@ -20,6 +21,7 @@ app.use(methodOverride("_method"));
 
 // Breads
 app.use("/breads", breadsController);
+app.use("/bakers", bakersController);
 
 // ROUTES
 app.get("/", (req, res) => {

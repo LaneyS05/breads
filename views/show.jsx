@@ -3,7 +3,7 @@ const Default = require("./layouts/Default");
 
 function Show({ bread, index }) {
   // Confirm we are getting our bread data in the terminal.
-  // console.log(bread.name)
+  //console.log("getBakedBy", bread.getBakedBy);
   return (
     <Default>
       <h2>Show Page</h2>
@@ -13,6 +13,7 @@ function Show({ bread, index }) {
         have gluten
       </p>
       <img src={bread.image} alt={bread.name} />
+      <p>Baked by {bread.getBakedBy()}</p>
 
       <a href={`/breads/${bread.id}/edit`}>
         <button>Edit</button>
