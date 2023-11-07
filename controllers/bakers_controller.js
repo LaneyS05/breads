@@ -9,5 +9,23 @@ baker.get("/data/seed", async (req, res) => {
   res.redirect("/bread");
 });
 
+// Index:
+baker.get("/", async (req, res) => {
+  const bakers = await Baker.find();
+  await Baker.populate(bakers, { path: "breads" });
+  res.render("bakersIndex", { bakers });
+});
+
+// Show:
+baker.get("/:id", (req, res) => {
+  Baker.findById(req.params.id)
+    .populate("breads")
+    .then((foundBaker) => {
+      res.render("bakerShow", {
+        baker: foundBaker,
+      });
+    });
+});
+
 // export
 module.exports = baker;

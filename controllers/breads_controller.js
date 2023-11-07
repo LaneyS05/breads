@@ -13,12 +13,25 @@ breads.get("/new", async (req, res) => {
 });
 
 // INDEX
-breads.get("/", async (req, res) => {
-  const allBreads = await Bread.find();
+//breads.get("/", async (req, res) => {
+//const allBreads = await Bread.find();
 
-  res.render("index", {
-    breads: allBreads,
-    title: "index Page",
+//res.render("index", {
+//breads: allBreads,
+//title: "index Page",
+//});
+//});
+
+// Index:
+breads.get("/", (req, res) => {
+  Baker.find().then((foundBakers) => {
+    Bread.find().then((foundBreads) => {
+      res.render("index", {
+        breads: foundBreads,
+        bakers: foundBakers,
+        title: "Index Page",
+      });
+    });
   });
 });
 
@@ -36,6 +49,7 @@ breads.post("/", (req, res) => {
   res.redirect("/breads");
 });
 
+//SHOW
 breads.get("/:id", (req, res) => {
   Bread.findById(req.params.id)
     .populate("baker")
