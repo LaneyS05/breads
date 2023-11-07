@@ -64,15 +64,17 @@ breads.get("/:id", (req, res) => {
 });
 
 // EDIT
-breads.get("/:id/edit", (req, res) => {
-  Baker.find().then((foundBakers) => {
-    Bread.findById(req.params.id).then((foundBread) => {
-      res.render("edit", {
-        bread: foundBread,
-        bakers: foundBakers,
-      });
-    });
-  });
+breads.get("/:id/edit", async (req, res) => {
+  const index = req.params.index;
+  const bread = await Bread.findById(index);
+  await bread.populate("baker");
+
+  const bakers = await Baker.find();
+
+  if (!bread) {
+    return res.send("NO bread");
+  }
+  res.render("edit", { bread, bakers });
 });
 
 // UPDATE

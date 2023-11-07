@@ -17,14 +17,11 @@ baker.get("/", async (req, res) => {
 });
 
 // Show:
-baker.get("/:id", (req, res) => {
-  Baker.findById(req.params.id)
-    .populate("breads")
-    .then((foundBaker) => {
-      res.render("bakerShow", {
-        baker: foundBaker,
-      });
-    });
+baker.get("/:id", async (req, res) => {
+  const index = req.params.index;
+  const baker = await Bakers.findById(index);
+  await baker.populate("breads");
+  res.render("bakerShow", baker);
 });
 
 // export
