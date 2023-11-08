@@ -19,17 +19,21 @@ const bakerSchema = new Schema(
     bio: {
       type: String,
     },
+    status: {
+      type: String,
+      default: "Employed",
+      enum: ["Employed", "Fired", "Laid Off", "Quit"],
+    },
   },
   { toJSON: { virtuals: true } }
 );
 
 //Virtuals
-bakerSchema.virtual("breads"),
-  {
-    ref: "Bread",
-    localField: "_id",
-    foreignField: "baker",
-  };
+bakerSchema.virtual("breads", {
+  ref: "Bread",
+  localField: "_id",
+  foreignField: "baker",
+});
 
 // model and export
 const Baker = mongoose.model("Baker", bakerSchema);

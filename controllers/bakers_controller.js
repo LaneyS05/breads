@@ -2,6 +2,7 @@
 const express = require("express");
 const baker = express.Router();
 const Baker = require("../models/baker.js");
+//const Breads = require("./bread");
 const bakerSeedData = require("../models/baker_seed.js");
 
 baker.get("/data/seed", async (req, res) => {
@@ -18,8 +19,8 @@ baker.get("/", async (req, res) => {
 
 // Show:
 baker.get("/:id", async (req, res) => {
-  const index = req.params.index;
-  const baker = await Bakers.findById(index);
+  const index = req.params.id;
+  const baker = await Baker.findById(index);
   await baker.populate("breads");
   res.render("bakerShow", baker);
 });

@@ -65,7 +65,8 @@ breads.get("/:id", (req, res) => {
 
 // EDIT
 breads.get("/:id/edit", async (req, res) => {
-  const index = req.params.index;
+  const index = req.params.id;
+  console.log(index);
   const bread = await Bread.findById(index);
   await bread.populate("baker");
 
@@ -92,16 +93,18 @@ breads.put("/:id", (req, res) => {
   );
 });
 
-// SHOW
+//NEW FORM
+breads.get("/new", async (req, res) => {
+  const bakers = await Baker.find();
+  res.render("new", { bakers });
+});
+
+// SHOW and Details
 breads.get("/:id", async (req, res) => {
   const id = req.params.od;
   const bread = await Bread.findById(id);
-  const bakedBy = bread.getBakedBy();
-  console.log(bakedBy);
-  res.render("show", {
-    bread,
-    id,
-  });
+  await bread.populate("baker", "name start Date");
+  res.render("show", bread);
 });
 
 // DELETE
