@@ -18,6 +18,10 @@ function Show(baker) {
         About {baker.name}: {baker.bio}
       </p>
       <h3>Breads {baker.name} has baked</h3>
+
+      <form action={`/bakers/${baker.id}?_method=DELETE`} method="POST">
+        <button>Delete</button>
+      </form>
     </Default>
   );
 }

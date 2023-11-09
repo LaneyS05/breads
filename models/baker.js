@@ -35,6 +35,17 @@ bakerSchema.virtual("breads", {
   foreignField: "baker",
 });
 
+//HOOKS
+bakerSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function () {
+    console.log("running pre deleteOne");
+    const baker = this;
+    console.log(baker._id);
+  }
+);
+
 // model and export
 const Baker = mongoose.model("Baker", bakerSchema);
 
